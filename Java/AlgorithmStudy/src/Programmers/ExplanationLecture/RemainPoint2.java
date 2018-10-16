@@ -30,54 +30,25 @@
 
 package Programmers.ExplanationLecture;
 
-import java.util.HashMap;
-import java.util.Map;
-
-// 직사각형을 만들기 위해서는 모든 좌표가 2개씩 나와야 한다.
+//직사각형을 만들기 위해서는 모든 좌표가 2개씩 나와야 한다.
+//XOR을 사용해서 같지 않은 좌표 1개를 출력한다.
 public class RemainPoint2 {
 	public static int[] solution(int[][] v) {
-		// 각각 x좌표와 y좌표를 담을 맵을 생성
-		Map<Integer, Integer> xPoint = new HashMap<Integer, Integer>();
-		Map<Integer, Integer> yPoint = new HashMap<Integer, Integer>();
-		// 정답배열
-		int[] answer = new int [2];
+		int[] answer = {0, 0};
 		
-		// 각각의 좌표를 키로 두고 좌표가 이미 맵에 있으면 +1을 한다.
 		for(int i = 0; i < v.length; i++) {
-			if(xPoint.containsKey(v[i][0])) {
-				xPoint.put(v[i][0], xPoint.get(v[i][0]) + 1);
-			} else {
-				xPoint.put(v[i][0], 1);
-			}
-			
-			if(yPoint.containsKey(v[i][1])) {
-				yPoint.put(v[i][1], yPoint.get(v[i][1]) + 1);
-			} else {
-				yPoint.put(v[i][1], 1);
-			}
+//			System.out.println("answer[0] : " + answer[0] + "  " + "v[i][0] : " + v[i][0]);
+//			System.out.println(answer[0] ^ v[i][0]);
+//			System.out.println("answer[1] : " + answer[1] + "  " + "v[i][1] : " + v[i][1]);
+//			System.out.println(answer[1] ^ v[i][1]);
+			answer[0] ^= v[i][0];
+			answer[1] ^= v[i][1];
 		}
 		
-		// 좌표가 1번만 나온 값을 찾는다.
-		for(Integer x : xPoint.keySet()) {
-			if(xPoint.get(x) == 1) {
-//				System.out.println(x);
-				answer[0] = x;
-			}
-		}
+//		System.out.println(Arrays.toString(answer));
 		
-		for(Integer y : yPoint.keySet()) {
-			if(yPoint.get(y) == 1) {
-//				System.out.println(y);
-				answer[1] = y;
-			}
-		}
-		
-//		for(int i = 0; i < answer.length; i++) {
-//			System.out.print(answer[i] + " ");
-//		}
-		
-        return answer;
-    }
+     return answer;
+ }
 
 	public static void main(String[] args) {
 		int[][] v = {{1, 4}, {3, 4}, {3, 10}};
